@@ -44,6 +44,9 @@ def token_select_dialog():
             nonlocal token
             token=file.read()
 
+        window.destroy() #We can shut down the GUI now that the bot is running.
+
+
     new_item.add_command(label='Load Token', command=choosefile)
     menu.add_cascade(label='File', menu=new_item)
     window.config(menu=menu)
