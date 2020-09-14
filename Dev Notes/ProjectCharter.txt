@@ -1,0 +1,25 @@
+OBJECTIVE: Create a Discord Bot that does the following:
+    -Can play a text-based adventure game with users that join the server
+    -Tracks data on individual server members' game sessions
+    -Uses this data to manage adventure game sessions, and track progress
+     in the game
+
+
+
+     GAME OUTLINE
+
+     It's autumn, and you live in a log cabin and need to collect enough wood to survive the winter.  You have to
+     venture out into the forest to collect enough wood to survive.  You have won once you've gathered five
+     logs of wood into your home.  The wood has to be of oak specifically; nothing else will burn right for
+     your preferences.
+
+     GAMEPLAY
+
+     Players can interact with the world using standard commands.  Examples include:
+        -north (n), south (s), east (e), west (w): attempt to move to a location in
+         one of those directions
+
+        -inventory (inv) (i): view inventory
+
+        -use (u) <itemname>: use an item in the inventory
+

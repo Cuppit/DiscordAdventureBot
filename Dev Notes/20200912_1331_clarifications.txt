@@ -1,0 +1,17 @@
+20200912_1331
+12 SEP 2020, 1:31 PM
+
+"selfdeletion.py" was written to model moving 'contained' objects from one 'container' to
+another, to better understand how players/rooms interact with each other, as well as how
+classes/instances/class variable vs. instance variables in Python work.
+
+Current problem: linking rooms together
+
+SOLUTION: Implement world as a 2d list of rooms.  Every room will have it's north, south,
+east, and west sides set to "open" or "closed".  Additionally, a "wrapper" class for
+rooms, called an "exit", will be used for any additional exits not covered by
+these concepts (can represent trap-doors in floors, ceilings, "portals", or other
+passageways not cleanly representable by NESW paths).
+
+ROOM DEFINITION
+    -x

@@ -1,0 +1,86 @@
+DB DESIGN DETAILS
+
+The database needs to, at a minimum, have a record of the game state for every
+uesr that logs into discord.
+
+GAME STATE
+
+The game state needs to track the following details:
+    -Player character sheet/stats
+    -Player inventory
+    -Player location
+    -All rooms in the game
+    -Contents of the rooms
+    -NPCs in the rooms
+    -Any set flags in the rooms
+
+All rooms and objects are just objects.  So to implement the whole world,
+
+Just make a list of objects that relate to one another in a certain way.
+
+Objects and rooms are the same thing.
+
+
+GAME OBJECT STRUCTURE
+
+It's all about the concept of "containment"
+
+There is a "root" object called "offscreen".  All "rooms" have "offscreen" as it's parent.
+
+TODO: review how to DEFINE classes in python, and from thoem how to INSTANTIATE objects
+
+GAME TABLE
+-Every room and object has an entry in the "master game table".
+
+For the adventure game parser, you need tables for the following concepts:
+
+ARTICLES (A, AN, THE)
+PREPOSITIONS (IN, ON, UNDER, OVER, AT, WITH)
+DICTIONARY (OLD, RUSTY, IRON, SWORD)
+VERBS (GET, TAKE, PICK UP, LOOK AT, X, LOOK) (CAN BE A LITTLE DIFFERENT, you have synonyms for verbs, associating specific IDs.
+
+ObjectWordTable: This is
+
+Jump Tables (maps user input to subroutines)
+
+String Tables (for names, descriptions, messages)
+
+PARSING
+
+1) clean up input (uppercase, remove articles)
+
+2) identify parts of speech
+
+3) Verify the words entered are in the game's dictionary
+
+sample sentence 1:
+    -Pick up the iron sword
+    1) CONVERT TO UPPERCASE
+       PICK UP THE IRON SWORD
+    2) REMOVE ARTICLES
+        PICK UP IRON SWORD
+    3) Look up Verb ID in the Verb Table
+        {PICK UP} IRON SWORD  [In this case, "PICK UP" is identified as a verb]
+
+    4) IDENTIFY DIRECT OBJECT OF VERB
+        PICK UP {IRON SWORD}
+        Is "IRON" in the dictionary?
+
+sample sentence 2:
+    REMOVE FROMITZ BOARD WITH SHINY PLIERS
+    {REMOVE} = VERB 10
+    {FROMITZ} = OBJ 3
+    {WITH} = PREP 4
+    {SHINY} = OBJ 12
+
+By using the combination 10,3,4,12, you are (somehow) able to learn about "subroutine" (function) "remove_fromitz_sub",
+which does something in game.
+
+
+DISAMBIGUATION
+How do you disambiguate when given ambiguous input?  For example, typing "get key", but there are multiple keys.
+Associate a "score" with each object, and whichever one is highest score, use that one.
+
+if word doesn't map to an object, set it's score to 0
+if object isn't visible, set score to 0
+

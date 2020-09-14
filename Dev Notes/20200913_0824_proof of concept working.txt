@@ -1,0 +1,18 @@
+20200913_0824
+13 September 2020
+
+A proof-of-concept was functioning.  The code for manually putting together a map was nasty.
+But now it shouldn't be a problem figuring out how to structure a database to hold game map
+data.  What might be a problem is figuring out how to model events/triggers, or
+how to efficiently save game states.
+
+Then there's the problem of setting up a script to run a check/pip every time the bot attempts
+to boot up to find/download dependencies.  This way no matter who uses the code, a bot
+will function the same.
+
+Finally, there's the issue of securing hosting to run the bot from.  Most services offer
+something like 30 gb ssd with a linux distro running on it and .5 gb RAM which I
+imagine is far more than would be needed for the Discord bot API for a bot that's barely
+messed with once or twice in a blue moon.
+
+Overall this will be a fun project to demonstrate a few aspects of IT.

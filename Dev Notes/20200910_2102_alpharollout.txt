@@ -1,0 +1,13 @@
+20200910_2102
+9:02 PM, 10 September, 2020
+
+The following files were added to the project:
+
+constants.py : This will hold all constants for the whole project.
+game.py : every time a new game is started, it will be "instantiated" with this module, and the entire state
+will be written to the database for each individual user.
+GameDB.db : This is intended to be a static repository of all of a game's data (rooms, objects, NPCs, functionality)
+
+TODO: Note to self; when you come back to work on the project, continue in 'game.py'.  The goal is to write
+a 'default' game to test basic parser functionality, so a basic world with two rooms, objects in each room,
+a player inventory.
