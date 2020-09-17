@@ -7,7 +7,8 @@ import discord # As of this comment writing, Discord API works with Python 3.6
 import DBMod # Import script with functions responsible for handling database management
 import random # Used for random number generation
 import game # Used to store the Adventure Game state
-import TokenSelector # GUI utility module for picking a token stored in a file on the filesystem.
+import TokenSelector # This project's custom GUI utility module for picking a token stored in a file on the filesystem.
+import sys
 
 TOKEN = TokenSelector.token_select_dialog()
 client = discord.Client()
@@ -71,19 +72,27 @@ async def on_message(message):
     if message.author == client.user:
         return
 
+    if msg.startswith('!help'):
+        msg = "I can be interacted with using the following commands:\n" \
+              "!help         : displays this help message\n" \
+              "!roll <x>d<y> : returns x random numbers in the range [1,y].  (ex: '!roll 1d6')\n" \
+              "!play         : Begins a new session of the Adventure Game for you (if you don't have one running already)"
+
+
+
     if msg.startswith('!hello'):
         msg = 'Hello {0.author.mention}'.format(message)
         await channel.send("hi "+message.author.mention)
         #await client.send_message(message.channel, msg)
 
-    if msg.startswith('!die'):
+    elif msg.startswith('!die'):
         msg = '{0.author.mention}, I\'m sorry, but I can\'t die yet.'.format(message)
         #await client.send_message(message.channel, msg)
 
-    if msg.startswith('!roll'):
+    elif msg.startswith('!roll'):
         await channel.send(dice_roll_msg(msg))
 
-    if msg.startswith("!play"):
+    elif msg.startswith("!play"):
         if message.author.id not in game_sessions:
             await channel.send("Loading game session for {0}:".format(message.author.mention))
             game_sessions[message.author.id] = game.Game()
@@ -91,6 +100,9 @@ async def on_message(message):
 
         else:
             await channel.send("You currently have a game session running.  Type '-help' for a list of commands!")
+
+    elif msg.startswith("!"):
+        await channel.send("Sorry, I didn't understand that.  Type '!help' for some commands I understand.")
 
 
     if msg.startswith("-"):

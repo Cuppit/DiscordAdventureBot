@@ -1,0 +1,14 @@
+20200916_2050
+16 Sep 2020
+
+Some hosting was set up, now the bot runs on it's own.  It doesn't do anything
+interesting yet, aside from host the demo game.  At least the demo game is
+functional for now.
+
+Now I have to figure out how to store/load a game from the database, as well as
+how to store a running game state locally, so that when a player starts playing
+again, they'll be able to pick up where they left off.
+
+TODO: TokenSelector.py needs to have some way of taking the bot token from the
+command line, instead of going through the awful GUI.
+
