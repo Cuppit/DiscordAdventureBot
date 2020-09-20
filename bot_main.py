@@ -46,8 +46,19 @@ def dice_roll_msg(msg):  # 'msg' is the original user message the bot received.
         inputs = msg.split()[1].split("d")
         if len(inputs) is 2:
             if inputs[0].isnumeric() and inputs[1].isnumeric():
-                dicerolls = roll_dice(int(inputs[0]), int(inputs[1]))
+                num_to_roll = int(inputs[0])
+                max_roll = int(inputs[1])
+                dicerolls = roll_dice(num_to_roll, max_roll)
                 roll = msg.split()[1]
+                rollstomod = str(dicerolls)[1:-1].split(", ")
+                for x in range(len(rollstomod)):
+                    if int(rollstomod[x]) == 1 and (max_roll == 20):
+                        rollstomod[x]="1 (Fug.)"
+                    elif (int(rollstomod[x]) == 20) and (max_roll == 20):
+                        rollstomod[x]="20 (YEET!)"
+                roll = ", ".join(rollstomod)
+
+
                 to_return += "ROLLING: "+roll+"\nROLL RESULTS: "+str(dicerolls)+"\nTOTAL: "+str(sum(dicerolls))
             else:
                 return "Sorry, I didn't understand that.  It looks like one of the characters in your roll isn't a number?\n"+helpmsg
