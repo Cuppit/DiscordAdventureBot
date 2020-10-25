@@ -10,8 +10,18 @@ import game # Used to store the Adventure Game state
 import TokenSelector # This project's custom GUI utility module for picking a token stored in a file on the filesystem.
 import sys
 
-TOKEN = TokenSelector.token_select_dialog()
-client = discord.Client()
+'''
+20201025_1347: The bot should attempt to read the token from a file included in the local directory.  If it doesn't 
+exist, then it can default to the "tokenselector" dialog.
+'''
+
+try:
+    with open ('adventurebot.token') as f:
+        TOKEN = f.readline()
+except IOError:
+    print("'discordbot.token' file not found.  Defaulting to TokenSelector prompt: ")
+    TOKEN = TokenSelector.token_select_dialog()
+    client = discord.Client()
 
 #Active connection to the bot's DB
 dbCon = DBMod.sql_connection()
@@ -87,7 +97,9 @@ async def on_message(message):
         msg = "I can be interacted with using the following commands:\n" \
               "!help         : displays this help message\n" \
               "!roll <x>d<y> : returns x random numbers in the range [1,y].  (ex: '!roll 1d6')\n" \
-              "!play         : Begins a new session of the Adventure Game for you (if you don't have one running already)"
+              "!play         : Begins a new session of the Adventure Game for you (if you don't have one running already)" \
+              "              : once you have a game session running, you can type '-help' for game specific commands."
+        await client.send_message(message.channel, msg)
 
 
 
@@ -98,7 +110,7 @@ async def on_message(message):
 
     elif msg.startswith('!die'):
         msg = '{0.author.mention}, I\'m sorry, but I can\'t die yet.'.format(message)
-        #await client.send_message(message.channel, msg)
+        await client.send_message(message.channel, msg)
 
     elif msg.startswith('!roll'):
         await channel.send(dice_roll_msg(msg))
