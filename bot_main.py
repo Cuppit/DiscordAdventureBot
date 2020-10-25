@@ -99,7 +99,7 @@ async def on_message(message):
               "!roll <x>d<y> : returns x random numbers in the range [1,y].  (ex: '!roll 1d6')\n" \
               "!play         : Begins a new session of the Adventure Game for you (if you don't have one running already)" \
               "              : once you have a game session running, you can type '-help' for game specific commands."
-        await client.send_message(message.channel, msg)
+        await channel.send(msg)
 
 
 
@@ -110,7 +110,7 @@ async def on_message(message):
 
     elif msg.startswith('!die'):
         msg = '{0.author.mention}, I\'m sorry, but I can\'t die yet.'.format(message)
-        await client.send_message(message.channel, msg)
+        await channel.send(msg)
 
     elif msg.startswith('!roll'):
         await channel.send(dice_roll_msg(msg))
